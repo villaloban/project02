@@ -3,6 +3,7 @@
 #include "io.h"
 #include "dag.h"
 #include <iostream>
+#include "topo.h"
 int main()
 {
     writeClients("data/data2.txt", 3, 220, {1, 3});
@@ -15,5 +16,10 @@ int main()
             std::cout << " (" << e.to << "," << e.weight << ")";
         std::cout << "\n";
     }
+    std::cout << "Topological order: ";
+    std::vector<int> order = topologicalSort(adj);
+    for (int v : order)
+        std::cout << v << " ";
+    std::cout << "\n";
     return 0;
 }
