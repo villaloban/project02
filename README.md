@@ -12,5 +12,7 @@ You will then be prompted to enter a data file to read, since my data files are 
 Once running the program with a data file it will produce an output file in the output folder where you will see the clients in the file, the optimal revenue, and the clients contributing. 
 
 # Extra Credit:
+### Adjacency List
 Per the extra credit we decided to implement the dag in the adjacency list format rather then opting for the matrix format. The adjacency list is not only easier to read, but also has a better time complexity.
+### BFS Queue
 Although a DFS approach would have been easier, we went with the extra credit route and implemented the BFS queue approach aka Khan's algorithm.
