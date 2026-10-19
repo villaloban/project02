@@ -7,24 +7,32 @@
 #include "optimize.h"
 int main()
 {
-    writeClients("data/data2.txt", 3, 220, {1, 3});
-    std::vector<client> clients = readClients("data/data2.txt");
-    std::vector<std::vector<Edge>> adj = buildDAG(clients);
-    // comment out for debugging the adjacency list
-    for (size_t v = 0; v < adj.size(); ++v)
+    std::cout << "Enter the file to read data: ";
+    std::string filename;
+    std::cin >> filename;
+
+    std::vector<client> clients = readClients(filename);
+    if (clients.empty())
     {
-        std::cout << v << ":";
-        for (const Edge &e : adj[v])
-            std::cout << " (" << e.to << "," << e.weight << ")";
-        std::cout << "\n";
+        std::cerr << "No clients found in the file.\n";
+        return 1;
     }
 
-    // comment out debugg for topo sorting
-    std::cout << "Topological order: ";
+    std::vector<std::vector<Edge>> adj = buildDAG(clients);
     std::vector<int> order = topologicalSort(adj);
-    for (int v : order)
-        std::cout << v << " ";
-    std::cout << "\n";
+    OptimizationResult Result = optimize(adj, order);
 
-        return 0;
+    std::cout << "There are " << clients.size() << " clients in this file\n";
+    std::cout << "Optimal revenue earned is " << Result.revenue << "\n";
+    std::cout << "Clients contributing to this optimal revenue: ";
+    for (size_t i = 0; i < Result.clients.size(); ++i)
+    {
+        std::cout << Result.clients[i];
+        if (i < Result.clients.size() - 1)
+            std::cout << ", ";
+    }
+    std::cout << "\n";
+    writeClients(filename, clients.size(), Result.revenue, Result.clients);
+
+    return 0;
 }
