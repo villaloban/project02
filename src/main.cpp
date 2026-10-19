@@ -1,8 +1,19 @@
 
 #include "client.h"
 #include "io.h"
+#include "dag.h"
+#include <iostream>
 int main()
 {
-    writeClients("data/data1.txt", 3, 220, {1, 3});
+    writeClients("data/data2.txt", 3, 220, {1, 3});
+    std::vector<client> clients = readClients("data/data2.txt");
+    std::vector<std::vector<Edge>> adj = buildDAG(clients);
+    for (size_t v = 0; v < adj.size(); ++v)
+    {
+        std::cout << v << ":";
+        for (const Edge &e : adj[v])
+            std::cout << " (" << e.to << "," << e.weight << ")";
+        std::cout << "\n";
+    }
     return 0;
 }
