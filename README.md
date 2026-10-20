@@ -1,6 +1,6 @@
 # Project 02 - Topological Sorting
 # Group Members:
-Anthony Villalobos, Ryan Broge
+Anthony Villalobos, Ryan Brogan
 
 # How to Run the Program:
 The command use to compile the project is: g++ -Wall -std=c++17 src/main.cpp src/io.cpp src/dag.cpp src/topo.cpp src/optimize.cpp -o project02
